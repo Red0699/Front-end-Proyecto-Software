@@ -1,0 +1,187 @@
+<header>
+    <div class="header-content">
+
+        <div class="logo">
+            <img width="220" alt="Logo Proyecto" src="/assets/LogoSoftwareTeam.png">
+        </div>
+
+        <div class="menu">
+            <nav>
+                <ul>
+                    <!-- se incluye el link para volver al Inicio -->
+                    <li><a href="/Inicio">Inicio</a></li>
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+
+</header>
+<!--------------------------------------------------------------------------------------------->
+<!-- para mostrar el listado de Propiedades -->
+
+<div class="lista">
+
+    <h2>Mostramos los registros de Propiedades </h2>
+
+
+    <button class="boton" (click)="consultaPropiedades()">Consultar</button>
+
+    <div class="esp">
+
+        <h2>{{tituloPropiedades}}</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ID Tipo Neg</th>
+                    <th>Título</th>
+                    <th>Ciudad</th>
+                    <th>Dirección</th>
+                    <th>Precio</th>
+                    <th>No habitaciones</th>
+                    <th>No baños</th>
+                    <th>Descripción</th>
+                    <th>ID Tipo Prop</th>
+                    <th>Area construida</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let tido of Propiedades">
+                    <td>{{ tido.id_propiedad }} </td>
+                    <td>{{ tido.id_tipoNeg}}</td>
+                    <td>{{ tido.titulo }} </td>
+                    <td>{{ tido.ciudad }}</td>
+                    <td>{{ tido.direccion }} </td>
+                    <td>{{ tido.precio }} </td>
+                    <td>{{ tido.No_habitaciones }} </td>
+                    <td>{{ tido.No_banos }} </td>
+                    <td>{{ tido.desc_prop }} </td>
+                    <td>{{ tido.id_tipoProp }} </td>
+                    <td>{{ tido.area_construida }} </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <br>
+</div>
+
+<br><br>
+
+<!--------------------------------------------------------------------------------------------->
+<!-- para mostrar un solo Propiedad -->
+<div class="bus">
+    <h4>Mostramos el Propiedad escogido </h4>
+
+    <form (ngSubmit)="buscarPropiedades()" [formGroup]="filtrarPropiedad">
+        <input class="controls" type="text" formControlName="textfiltro" placeholder="Ingrese ID de una propiedad">
+
+        <button class="boton" type="submit">Buscar propiedad</button>
+    </form>
+
+    <div class="esp">
+        <h2>{{tituloPropiedad}}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ID Tipo Neg</th>
+                    <th>Título</th>
+                    <th>Ciudad</th>
+                    <th>Dirección</th>
+                    <th>Precio</th>
+                    <th>No habitaciones</th>
+                    <th>No baños</th>
+                    <th>Descripción</th>
+                    <th>ID Tipo Prop</th>
+                    <th>Area construida</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let tido of MiPropiedad">
+                    <td>{{ tido.id_propiedad }} </td>
+                    <td>{{ tido.id_tipoNeg}}</td>
+                    <td>{{ tido.titulo }} </td>
+                    <td>{{ tido.ciudad }}</td>
+                    <td>{{ tido.direccion }} </td>
+                    <td>{{ tido.precio }} </td>
+                    <td>{{ tido.No_habitaciones }} </td>
+                    <td>{{ tido.No_banos }} </td>
+                    <td>{{ tido.desc_prop }} </td>
+                    <td>{{ tido.id_tipoProp }} </td>
+                    <td>{{ tido.area_construida }} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+
+</div>
+
+<br><br>
+
+<!--------------------------------------------------------------------------------------------->
+<!-- para crear un Propiedad -->
+
+<div class="crea">
+
+    <h4>Crear un Propiedad </h4>
+
+    <form (ngSubmit)="InsertarPropiedad()" [formGroup]="InsertarGPropiedad">
+        <input class="controls" type="text" formControlName="textIdTipoNeg" placeholder="Ingrese ID tipo negocio">
+        <textarea class="controls"  formControlName="textTitulo" placeholder="Ingrese titulo"></textarea>
+        <input class="controls" type="text" formControlName="textCiudad" placeholder="Ingrese ciudad">
+        <textarea class="controls"  formControlName="textDireccion" placeholder="Ingrese dirección"></textarea>
+        <input class="controls" type="text" formControlName="textPrecio" placeholder="Ingrese precio">
+        <input class="controls" type="text" formControlName="textNoHabitaciones" placeholder="Ingrese No de habitaciones">
+        <input class="controls" type="text" formControlName="textNoBanos" placeholder="Ingrese No de baños">
+        <textarea class="controls" rows="10" cols="50" formControlName="textDescProp" placeholder="Ingrese breve descripción"></textarea>
+        <input class="controls" type="text" formControlName="textIdTipoProp" placeholder="Ingrese ID tipo propiedad">
+        <input class="controls" type="text" formControlName="textAreaConstruida" placeholder="Ingrese area construida">
+
+        <button class="boton" type="submit">Insertar propiedad</button>
+        <input class="botonReset" type="reset" value="Limpiar nueva propiedad">
+
+    </form>
+    <br>
+</div>
+
+<br><br>
+
+<!--------------------------------------------------------------------------------------------->
+<!-- para actualizar un Propiedad -->
+
+<div class="edit">
+    <h4>Editar un Propiedad</h4>
+    <form (ngSubmit)="buscarEditarPropiedad()" [formGroup]="ActualizarAPropiedad">
+        <input class="controls" type="text" formControlName="ActualizarIdPropiedad" placeholder="Ingrese ID de la propiedad">
+
+
+        <button class="boton" type="submit">Buscar propiedad a editar</button>
+        <br><br>
+
+        <li *ngFor="let tido of MiPropiedadE">
+            <input class="controls" type="text" [value]="tido.id_tipoNeg" formControlName="nuevoIdTipoNeg" placeholder="Ingrese ID tipo negocio">
+            <textarea class="controls" [value]="tido.titulo" formControlName="nuevoTitulo" placeholder="Ingrese titulo"></textarea>
+            <input class="controls" type="text" [value]="tido.ciudad" formControlName="nuevoCiudad" placeholder="Ingrese ciudad">
+            <textarea class="controls" [value]="tido.direccion" formControlName="nuevoDireccion" placeholder="Ingrese dirección"></textarea>
+            <input class="controls" type="text" [value]="tido.precio" formControlName="nuevoPrecio" placeholder="Ingrese precio">
+            <input class="controls" type="text" [value]="tido.No_habitaciones" formControlName="nuevoNoHabitaciones" placeholder="Ingrese No habitaciones">
+            <input class="controls" type="text" [value]="tido.No_banos" formControlName="nuevoNoBanos" placeholder="Ingrese No baños">
+            <textarea class="controls" rows="10" cols="50" [value]="tido.desc_prop" formControlName="nuevoDescProp" placeholder="Ingrese breve descripción"></textarea>
+            <input class="controls" type="text" [value]="tido.id_tipoProp" formControlName="nuevoIdTipoProp" placeholder="Ingrese ID tipo propiedad">
+            <input class="controls" type="text" [value]="tido.area_construida" formControlName="nuevoAreaConstruida" placeholder="Ingrese area construida">
+
+        </li>
+        <button class="botonAct" (click)="ActualizarPropiedad()">Actualizar propiedad</button>
+        <input class="botonReset" type="reset" value="Limpiar Campos">
+        <br><br>
+    </form>
+</div>
+

@@ -1,0 +1,138 @@
+<header>
+    <div class="header-content">
+
+        <div class="logo">
+            <img width="220" alt="Logo Proyecto" src="/assets/LogoSoftwareTeam.png">
+        </div>
+
+        <div class="menu">
+            <nav>
+                <ul>
+                    <!-- se incluye el link para volver al Inicio -->
+                    <li><a href="/Inicio">Inicio</a></li>
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+
+</header>
+<!--------------------------------------------------------------------------------------------->
+<!-- para mostrar el listado de Tipos de negocio -->
+
+<div class="lista">
+
+    <h2>Mostramos los registros de tipos de negocio </h2>
+
+
+    <button class="boton" (click)="consultaTipoNegs()">Consultar</button>
+
+    <div class="esp">
+
+        <h2>{{tituloTipoNegs}}</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let tido of TipoNegs">
+                    <td>{{ tido.id_tipoNeg }}</td>
+                    <td>{{ tido.desc_Neg}} </td>
+
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+    <br>
+</div>
+
+<br><br>
+
+<!--------------------------------------------------------------------------------------------->
+<!-- para mostrar un solo tipo de negocio -->
+<div class="bus">
+    <h4>Mostramos el tipo de propiedad escogido </h4>
+
+    <form (ngSubmit)="buscarTipoNegs()" [formGroup]="filtrarTipoNeg">
+        <input class="controls" type="text" formControlName="textfiltro" placeholder="Ingrese ID de un tipo de negocio">
+
+        <button class="boton" type="submit">Buscar TipoNeg</button>
+    </form>
+
+    <div class="esp">
+        <h2>{{tituloTipoNeg}}</h2>
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let tido of MiTipoNeg">
+                    <td>{{ tido.id_tipoNeg }}</td>
+                    <td>{{ tido.desc_Neg}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+
+</div>
+
+<br><br>
+
+<!--------------------------------------------------------------------------------------------->
+<!-- para crear un TipoNeg -->
+
+<div class="crea">
+
+    <h4>Crear una TipoNeg </h4>
+
+    <form (ngSubmit)="InsertarTipoNeg()" [formGroup]="InsertarGTipoNeg">
+        <input class="controls" type="text" formControlName="textDescNeg" placeholder="Tipo de negocio">
+
+        <button class="boton" type="submit">Insertar TipoNeg</button>
+        <input class="botonReset" type="reset" value="Limpiar nuevo TipoNeg">
+
+    </form>
+    <br>
+</div>
+
+<br><br>
+
+<!--------------------------------------------------------------------------------------------->
+<!-- para actualizar un TipoNeg -->
+
+<div class="edit">
+    <h4>Editar un TipoNeg</h4>
+    <form (ngSubmit)="buscarEditarTipoNeg()" [formGroup]="ActualizarATipoNeg">
+        <input class="controls" type="text" formControlName="ActualizarIdTipoNeg"
+            placeholder="Ingresar tipo negocio a editar">
+
+
+        <button class="boton" type="submit">Buscar TipoNeg a editar</button>
+
+        <li *ngFor="let tido of MiTipoNegE">
+            <input class="controls" type="text" [value]="tido.desc_Neg" formControlName="nuevoDescNeg"
+                placeholder="Ingrese tipo de negocio">
+
+        </li>
+        <br>
+        <button class="boton" (click)="ActualizarTipoNeg()">Actualizar TipoNeg</button>
+        <input class="botonReset" type="reset" value="Limpiar Campos">
+    </form>
+</div>
+

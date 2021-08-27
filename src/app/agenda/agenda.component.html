@@ -1,0 +1,285 @@
+<header>
+    <div class="header-content">
+
+        <div class="logo">
+            <img width="220" alt="Logo Proyecto" src="/assets/LogoSoftwareTeam.png">
+        </div>
+
+        <div class="menu">
+            <nav>
+                <ul>
+                    <!-- se incluye el link para volver al Inicio -->
+                    <li><a href="/Inicio">Inicio</a></li>
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+
+</header>
+<!--------------------------------------------------------------------------------------------->
+<!-- para mostrar el listado de Agendas -->
+
+<div class="lista">
+
+    <h2>Mostramos los registros de agendas </h2>
+
+
+    <button class="boton" (click)="consultaAgendas()">Consultar</button>
+
+    <div class="esp">
+
+        <h2>{{tituloAgendas}}</h2>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ID Cliente</th>
+                    <th>ID Vendedor</th>
+                    <th>Comentarios</th>
+                    <th>Fecha y hora</th>
+                    <th>ID Propiedad</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let tido of Agendas">
+                    <td>{{ tido.id_agenda }} </td>
+                    <td>{{ tido.id_cliente}} </td>
+                    <td>{{ tido.id_vendedor }} </td>
+                    <td>{{ tido.comentarios }} </td>
+                    <td>{{ tido.fecha_hora }}</td>
+                    <td>{{ tido.id_propiedad }} </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <br>
+</div>
+
+<br><br>
+
+<!--------------------------------------------------------------------------------------------->
+<!-- para mostrar una sola Agenda -->
+<div class="bus">
+    <h4>Mostramos la agenda escogida </h4>
+
+    <form (ngSubmit)="buscarAgendas()" [formGroup]="filtrarAgenda">
+        <input class="controls" type="text" formControlName="textfiltro" placeholder="Ingrese ID de una agenda">
+
+        <button class="boton" type="submit">Buscar agenda</button>
+    </form>
+
+    <div class="esp">
+        <h2>{{tituloAgenda}}</h2>
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ID Cliente</th>
+                    <th>ID Vendedor</th>
+                    <th>Comentarios</th>
+                    <th>Fecha y hora</th>
+                    <th>ID Propiedad</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let tido of MiAgenda">
+                    <td>{{ tido.id_agenda }} </td>
+                    <td>{{ tido.id_cliente}} </td>
+                    <td>{{ tido.id_vendedor }} </td>
+                    <td>{{ tido.comentarios }} </td>
+                    <td>{{ tido.fecha_hora }}</td>
+                    <td>{{ tido.id_propiedad }} </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <br>
+
+</div>
+
+<br><br>
+
+<!--------------------------------------------------------------------------------------------->
+<!-- para crear un Agenda -->
+
+<div class="crea">
+
+    <h4>Crear una agenda </h4>
+
+    <form (ngSubmit)="InsertarAgenda()" [formGroup]="InsertarGAgenda">
+        <input class="controls" type="text" formControlName="textIdCliente" placeholder="ID Cliente">
+        <input class="controls" type="text" formControlName="textIdVendedor" placeholder="ID Vendedor">
+        <textarea class="controls" rows="10" cols="40" formControlName="textComentarios" placeholder="Comentarios"></textarea>
+        <input class="controls" type="text" formControlName="textFechaHora" placeholder="Fecha y hora">
+        <input class="controls" type="text" formControlName="textIdPropiedad" placeholder="ID Propiedad">
+
+
+        <button class="boton" type="submit">Insertar agenda</button>
+        <input class="botonReset" type="reset" value="Limpiar nueva agenda">
+
+    </form>
+    <br>
+</div>
+
+<br><br>
+
+<!--------------------------------------------------------------------------------------------->
+<!-- para actualizar un Agenda -->
+
+<div class="edit">
+    <h4>Editar una agenda</h4>
+    <form (ngSubmit)="buscarEditarAgenda()" [formGroup]="ActualizarAAgenda">
+        <input class="controls" type="text" formControlName="ActualizarIdAgenda" placeholder="Ingrese ID de la agenda">
+
+
+        <button class="boton" type="submit">Buscar agenda a editar</button>
+        <br><br>
+
+        <li *ngFor="let tido of MiAgendaE">
+            <input class="controls" type="text" [value]="tido.id_cliente" formControlName="nuevoIdCliente" placeholder="Ingrese ID del cliente">
+            <input class="controls" type="text" [value]="tido.id_vendedor" formControlName="nuevoIdVendedor" placeholder="Ingrese ID del vendedor">
+            <textarea class="controls" rows="10" cols="40" [value]="tido.comentarios" formControlName="nuevoComentarios" placeholder="Ingrese comentarios"></textarea>
+            <input class="controls" type="text" [value]="tido.fecha_hora" formControlName="nuevoFechaHora" placeholder="Ingrese fecha y hora">
+            <input class="controls" type="text" [value]="tido.id_propiedad" formControlName="nuevoIdPropiedad" placeholder="Ingrese ID de la propiedad">
+
+
+        </li>
+        <button class="boton" (click)="ActualizarAgenda()">Actualizar Agenda</button>
+        <input class="botonReset" type="reset" value="Limpiar Campos">
+        <br><br>
+    </form>
+</div>
+
+<!--------------------------------------------------------------------------------------------->
+<!-- mostrar informe por propiedad y periodo de tiempo -->
+<div class="businfo">
+    <h4>Informe por propiedad y periodo de tiempo </h4>
+
+    <form (ngSubmit)="informePropiedad()" [formGroup]="InformePropG">
+        <input class="controls" type="text" formControlName="textIdInfoProp" placeholder="Ingrese ID de una propiedad">
+        <input class="controls" type="text" formControlName="textFiInfoProp" placeholder="Ingrese fecha inicial">
+        <input class="controls" type="text" formControlName="textFfInfoProp" placeholder="Ingrese fecha final">
+
+        <button class="boton" type="submit">Buscar informe</button>
+    </form>
+
+    <div class="espinfo">
+        <h2>{{tituloInformeProp}}</h2>
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID propiedad</th>
+                    <th>Tipo de negocio</th>
+                    <th>Titulo</th>
+                    <th>Ciudad</th>
+                    <th>Dirección</th>
+                    <th>Precio</th>
+                    <th>Habitaciones</th>
+                    <th>Baños</th>
+                    <th>Descripción</th>
+                    <th>Tipo de propiedad</th>
+                    <th>Area construida</th> 
+                    <th>Fecha y hora</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let infProp of InformeProp">
+                    <td>{{ infProp.id_propiedad }} </td>
+                    <td>{{ infProp.desc_Neg}} </td>
+                    <td>{{ infProp.titulo }} </td>
+                    <td>{{ infProp.ciudad }} </td>
+                    <td>{{ infProp.direccion }}</td>
+                    <td>{{ infProp.precio }} </td>
+                    <td>{{ infProp.No_habitaciones }} </td>
+                    <td>{{ infProp.No_banos }} </td>
+                    <td>{{ infProp.desc_Prop }} </td>
+                    <td>{{ infProp.desc_tipoProp }} </td>
+                    <td>{{ infProp.area_construida }} </td>
+                    <td>{{ infProp.fecha_hora }} </td> 
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <br>
+
+</div>
+
+<br><br>
+
+<!--------------------------------------------------------------------------------------------->
+<!-- mostrar informe por vendedor y periodo de tiempo -->
+<div class="bus">
+    <h4>Informe por vendedor y periodo de tiempo </h4>
+
+    <form (ngSubmit)="informeVendedor()" [formGroup]="InformeVendG">
+        <input class="controls" type="text" formControlName="textIdInfoVend" placeholder="Ingrese ID de un vendedor">
+        <input class="controls" type="text" formControlName="textFiInfoVend" placeholder="Ingrese fecha inicial">
+        <input class="controls" type="text" formControlName="textFfInfoVend" placeholder="Ingrese fecha final">
+
+        <button class="boton" type="submit">Buscar informe</button>
+    </form>
+
+    <div class="esp">
+        <h2>{{tituloInformeVend}}</h2>
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID vendedor</th>
+                    <th>Nombre 1</th>
+                    <th>Nombre 2</th>
+                    <th>Apellido 1</th>
+                    <th>Apellido 2</th>
+                    <th>Descripción</th>
+                    <th>Fecha y hora</th>
+                    <th>Comentarios</th>
+                    
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let infVend of InformeVend">
+                    <td>{{ infVend.id_vendedor }} </td>
+                    <td>{{ infVend.nom1_vendedor}} </td>
+                    <td>{{ infVend.nom2_vendedor }} </td>
+                    <td>{{ infVend.ape1_vendedor }} </td>
+                    <td>{{ infVend.ape2_vendedor }}</td>
+                    <td>{{ infVend.desc_vendedor }} </td>
+                    <td>{{ infVend.fecha_hora }} </td>
+                    <td>{{ infVend.comentarios }} </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <br>
+
+</div>
+
+<br><br>
+
+
